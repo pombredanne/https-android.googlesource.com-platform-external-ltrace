@@ -22,7 +22,6 @@
  */
 
 #include <string.h>
-#include <error.h>
 #include <errno.h>
 #include <gelf.h>
 #include <sys/ptrace.h>
@@ -210,7 +209,7 @@ arch_elf_init(struct ltelf *lte, struct library *lib)
 	if (elf_get_section_type(lte, SHT_DYNAMIC, &scn, &shdr) < 0
 	    || scn == NULL) {
 	fail:
-		error(0, 0, "Couldn't get SHT_DYNAMIC: %s",
+		fprintf(stderr, "Couldn't get SHT_DYNAMIC: %s",
 		      elf_errmsg(-1));
 		return -1;
 	}
@@ -238,7 +237,10 @@ arch_elf_init(struct ltelf *lte, struct library *lib)
 
 	/* Tell the generic code how many dynamic trace:able symbols
 	 * we've got.  */
-	lte->relplt_count = lte->dynsym_count - lte->arch.mips_gotsym;
+	/* BEGIN android-changed */
+	/* TODO(mkayyash): Investigate a fix for missing relplt_count. */
+	/* lte->relplt_count = lte->dynsym_count - lte->arch.mips_gotsym; */
+	/* END android-changed */
 	return 0;
 }
 

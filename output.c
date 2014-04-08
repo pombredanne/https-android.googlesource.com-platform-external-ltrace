@@ -725,7 +725,7 @@ output_right(enum tof type, struct process *proc, struct library_symbol *libsym,
 
 		/* Verify that we can safely cast arch_addr_t* to
 		 * unw_word_t*.  */
-		(void)sizeof(char[1 - 2*(sizeof(unw_word_t)
+		(void)sizeof(char[1 - (2*(sizeof(unw_word_t))
 					!= sizeof(arch_addr_t))]);
 		unw_init_remote(&cursor, proc->unwind_as, proc->unwind_priv);
 		while (unwind_depth) {
