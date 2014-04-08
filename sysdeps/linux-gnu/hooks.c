@@ -40,10 +40,7 @@ append(const char *str1, const char *str2)
 	char *ret = malloc(strlen(str1) + strlen(str2) + 2);
 	if (ret == NULL)
 		return ret;
-	/* BEGIN android-changed */
-	strcpy(ret, str1);
-	strcat(ret, str2);
-	/* END android-changed */
+	strcpy(stpcpy(ret, str1), str2);
 	return ret;
 }
 
