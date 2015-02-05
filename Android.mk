@@ -175,7 +175,6 @@ LOCAL_STATIC_LIBRARIES := libelf
 
 LOCAL_SHARED_LIBRARIES := \
     libcutils \
-    libgccdemangle \
     libselinux \
     libunwind \
     libunwind-ptrace \
