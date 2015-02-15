@@ -63,9 +63,6 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/ \
     $(LOCAL_PATH)/sysdeps/ \
     $(LOCAL_PATH)/sysdeps/linux-gnu \
-    external/elfutils \
-    external/elfutils/0.153/libelf \
-    external/libunwind/include \
 
 arm_path := sysdeps/linux-gnu/arm
 LOCAL_C_INCLUDES_arm := $(LOCAL_PATH)/$(arm_path)
