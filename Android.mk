@@ -174,7 +174,6 @@ LOCAL_SHARED_LIBRARIES := \
     libcutils \
     libselinux \
     libunwind \
-    libunwind-ptrace \
 
 LOCAL_MODULE := ltrace
 
