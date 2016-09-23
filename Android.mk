@@ -14,11 +14,6 @@
 # limitations under the License.
 #
 
-# If you actually want to use ltrace, let android-bionic@ know.
-# One of its dependencies (libelf) won't build with clang,
-# and we want to know whether anyone actually cares...
-ifeq (true,false)
-
 LOCAL_PATH := $(call my-dir)
 
 # -------------------------------------------------------------------------
@@ -160,8 +155,8 @@ LOCAL_CFLAGS += \
     -DVERSION='"0.7.91"' \
     -D_FILE_OFFSET_BITS=64 \
     -D_LARGE_FILES=1 \
-    -DPKGDATADIR=NULL \
-    -DSYSCONFDIR='"/etc/"' \
+    -DPKGDATADIR='"/system/etc/"' \
+    -DSYSCONFDIR='"/system/etc/"' \
     -Drindex=strrchr \
 
 LOCAL_CFLAGS_32 += -DSIZEOF_LONG=4
@@ -173,7 +168,7 @@ LOCAL_CFLAGS += \
     -Wno-unused-parameter \
     -Wno-sign-compare \
 
-LOCAL_STATIC_LIBRARIES := libelf
+LOCAL_STATIC_LIBRARIES := libelf libz
 
 LOCAL_SHARED_LIBRARIES := \
     libcutils \
@@ -192,4 +187,22 @@ LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 
 include $(BUILD_EXECUTABLE)
 
-endif
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := syscalls.conf
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT)/etc
+LOCAL_SRC_FILES := etc/syscalls.conf
+include $(BUILD_PREBUILT)
+include $(CLEAR_VARS)
+LOCAL_MODULE := libc.so.conf
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT)/etc
+LOCAL_SRC_FILES := etc/libc.so.conf
+include $(BUILD_PREBUILT)
+include $(CLEAR_VARS)
+LOCAL_MODULE := libm.so.conf
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT)/etc
+LOCAL_SRC_FILES := etc/libm.so.conf
+include $(BUILD_PREBUILT)
